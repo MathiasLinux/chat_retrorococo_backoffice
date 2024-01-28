@@ -1,0 +1,13 @@
+.headerChat{
+    background-color: var(--grey);
+    padding: 0.5%;
+}
+
+.blueButton{
+    background-color: var(--blue) !important;
+    border: var(--blue) !important;
+}
+
+.mainTitle{
+    font-size: 20pt;
+}

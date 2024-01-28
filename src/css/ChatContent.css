@@ -1,0 +1,16 @@
+.chatMessage{
+    background-color: var(--light-grey);
+    margin: 4%;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+.chatMessage.fromMe{
+    background-color: var(--blue);
+    color: white;
+    margin-left: 20%;
+}
+
+.chatMessage.otherUser{
+    margin-right: 20%;
+}

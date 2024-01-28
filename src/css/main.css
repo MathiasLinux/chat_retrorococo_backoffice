@@ -1,0 +1,9 @@
+:root{
+    --grey: #B8B8B8;
+    --light-grey: #E2E2E2;
+    --blue: #25B9D7;
+}
+
+.colWithoutPadding{
+    padding: 0 !important;
+}
