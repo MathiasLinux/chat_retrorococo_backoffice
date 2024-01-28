@@ -1,5 +1,6 @@
 .sideBarMain {
     background-color: var(--light-grey);
+    height: 100%;
 }
 
 .sideBarTitle{

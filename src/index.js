@@ -7,6 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 
 import Root from "./Pages/Root";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

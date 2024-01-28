@@ -1,3 +1,9 @@
+.chatContentMain{
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
 .chatMessage{
     background-color: var(--light-grey);
     margin: 4%;
@@ -13,4 +19,7 @@
 
 .chatMessage.otherUser{
     margin-right: 20%;
+}
+
+.messageBarContainer{
 }
