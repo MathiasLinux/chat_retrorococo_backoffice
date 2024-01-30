@@ -9,6 +9,9 @@ const ChatContent = ({socket}) => {
     const [message, setMessage] = React.useState('');
 
     function sendMessage() {
+        if (message === '') {
+            return;
+        }
 
         let messageObject = {
             message: message,
@@ -29,7 +32,7 @@ const ChatContent = ({socket}) => {
 
     useEffect(() => {
         socket.on('message', (message) => {
-            console.log(message);
+            // console.log(message);
             // check the data-id is equal to the id of the room
             message = message.message;
             let idDiv = document.querySelector('.sideBarChatContentSelected').getAttribute('data-roomid');
@@ -57,7 +60,7 @@ const ChatContent = ({socket}) => {
         socket.on('oldMessages', (oldMessages) => {
             // console.log(typeof oldMessages.messages);
             Object.values(oldMessages.messages).forEach((value) => {
-                console.log(value);
+                // console.log(value);
                 let messageObject = {
                     message: value.message,
                     fromMe: value.fromMe
