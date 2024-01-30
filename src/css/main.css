@@ -15,3 +15,8 @@
 .mainRowContent{
     height: 100%;
 }
+
+.waitingRoomTitle{
+    font-size: 24pt;
+    margin-bottom: 0;
+}

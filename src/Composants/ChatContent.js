@@ -1,19 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "../css/ChatContent.css";
 
 
-const ChatContent = (socket) => {
-    socket = socket.socket;
-    const [messages, setMessages] = React.useState([
-        {
-            message: "Bonjour, je suis là pour vous aider.",
-            fromMe: true
-        },
-        {
-            message: "Bonjour, je suis là pour vous aider.",
-            fromMe: false
-        }
-    ]);
+const ChatContent = ({socket}) => {
+    // socket = socket.socket;
+    const [messages, setMessages] = React.useState([]);
 
     const [message, setMessage] = React.useState('');
 
@@ -25,13 +16,63 @@ const ChatContent = (socket) => {
         }
         setMessages([...messages, messageObject]);
         // Send the message to the server
-        console.log(message);
+        // console.log(message);
         socket.emit('message', {
             userFirstName: socket.userFirstName,
             content: message
         });
         setMessage('');
+        // Scroll to the bottom of the chatContent div
+        const chatContent = document.querySelector('.chatMessages');
+        chatContent.scrollTop = chatContent.scrollHeight;
     }
+
+    useEffect(() => {
+        socket.on('message', (message) => {
+            console.log(message);
+            // check the data-id is equal to the id of the room
+            message = message.message;
+            let idDiv = document.querySelector('.sideBarChatContentSelected').getAttribute('data-roomid');
+            if (message.isAdmin == false && message.from == idDiv) {
+                let messageObject = {
+                    message: message.content,
+                    fromMe: false
+                }
+                setMessages([...messages, messageObject]);
+                // console.log(messages);
+                // Scroll to the bottom of the chatContent div
+                const chatContent = document.querySelector('.chatMessages');
+            }
+        });
+        return () => {
+            socket.off('message');
+            // Scroll to the bottom of the chatContent div
+            const chatContent = document.querySelector('.chatMessages');
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+    }, [messages, socket]);
+
+    useEffect(() => {
+        // console.log('oldMessages on');
+        socket.on('oldMessages', (oldMessages) => {
+            // console.log(typeof oldMessages.messages);
+            Object.values(oldMessages.messages).forEach((value) => {
+                console.log(value);
+                let messageObject = {
+                    message: value.message,
+                    fromMe: value.fromMe
+                }
+                setMessages(prevMessages => [...prevMessages, messageObject]);
+            });
+        });
+        return () => {
+            // console.log('oldMessages off');
+            socket.off('oldMessages');
+            // Scroll to the bottom of the chatContent div
+            const chatContent = document.querySelector('.chatMessages');
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+    }, [messages, socket]);
 
     return (
         <div className="chatContentMain">

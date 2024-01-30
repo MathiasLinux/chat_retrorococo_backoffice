@@ -1,7 +1,11 @@
 .chatContentMain{
-    height: 100%;
     display: grid;
     grid-template-rows: auto 1fr;
+}
+
+.chatMessages{
+    height: 50dvh;
+    overflow-y: scroll;
 }
 
 .chatMessage{
@@ -22,4 +26,8 @@
 }
 
 .messageBarContainer{
+}
+
+.sideBarChatContentSelected{
+    background-color: var(--blue);
 }
